@@ -1,0 +1,25 @@
+{
+  "name": "temperatura-server",
+  "version": "0.2.5",
+  "description": "Temperatura server",
+  "engines": {
+    "node": "5.9.1"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.13.3",
+    "johnny-five": "^0.10.6"    
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gustavobpaula/arcondicionado-arduino.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ]
+}

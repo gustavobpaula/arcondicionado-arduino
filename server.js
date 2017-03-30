@@ -1,19 +1,38 @@
 var five = require("johnny-five");
+var board = new five.Board();
+var express = require("express");
+var app = express();
+var temp;
 
-five.Board({ port: "COM3" }).on("ready", function() {
+board.on("ready", function() {
   var temperature = new five.Thermometer({
     controller: "LM35",
     pin: "A1"
   });
 
-  var celsius = 0;
-
   temperature.on("change", function() {
-    celsius = this.celsius;
-    //console.log(this.celsius + "°C", this.fahrenheit + "°F");
+    console.log(this.celsius + "°C", this.fahrenheit + "°F");
+    temp = this;
   });
-
-  setInterval(function(){
-    console.log(celsius + "°C");
-  }, 1000);
 });
+
+app.all('/*', function(req, res, next) {
+  //Cors headers
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  //Set custom header for cors
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Accept,X-Access-Token,X-Key,x-requested-with');
+  if(req.method == 'OPTIONS') {
+    res.status(200).end();
+  }else {
+    next();
+  }
+});
+
+app.get('/temperatura', function(req, res){
+  res.send(temp.celsius + '°C');
+});
+
+var server = app.listen(3000);
+console.log('Servidor Express iniciado na porta %s', server.address().port);
+
