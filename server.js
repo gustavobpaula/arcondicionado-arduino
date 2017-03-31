@@ -37,6 +37,6 @@ app.get('/temperatura', function(req, res){
   res.send(temp.celsius + '°C');
 });
 
-/*var server = app.listen('https://nameless-wave-78170.herokuapp.com/');
-console.log('Servidor Express iniciado na porta %s', server.address().port);*/
+var server = app.listen(3000);
+console.log('Servidor Express iniciado na porta %s', server.address().port);
 
