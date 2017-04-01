@@ -34,7 +34,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/temperatura', function(req, res){
-  res.send(temp.celsius + '°C');
+  res.send(temp.celsius.toString());
 });
 
 var server = app.listen(3000);
